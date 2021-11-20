@@ -1,6 +1,7 @@
 import server from "../server";
 import { Server } from "socket.io";
-import joinController from "./room";
+import roomController from "./room";
+import gameController from "./game";
 
 export const io = new Server(server, {
   cors: {
@@ -10,8 +11,7 @@ export const io = new Server(server, {
 
 export default () => {
   io.on("connection", (socket) => {
-    console.log("New socket connected");
-
-    joinController(socket);
+    roomController(socket);
+    gameController(socket);
   });
 };
